@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desamsetti Sivaji — Robotics and Automation Student</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F6F2;
+      --ink: #1A1A18;
+      --muted: #7A7A72;
+      --accent: #D4521A;
+      --line: #E0DED8;
+      --card: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(247,246,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      z-index: 100; padding: 1.1rem 0;
+    }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 80px; border-bottom: 1px solid var(--line);
+    }
+    .hero-inner {
+      padding: 4rem 0 3rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 3rem;
+    }
+    .hero-text { flex: 1; }
+
+    .hero-photo { flex-shrink: 0; }
+    .hero-photo img {
+      width: 200px; height: 230px;
+      object-fit: cover; object-position: top center;
+      border: 1px solid var(--line);
+      display: block;
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: inline-block; }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.08; letter-spacing: -0.01em;
+      margin-bottom: 1.5rem; font-weight: 400;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 2.5rem; font-weight: 300;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--ink); color: #fff;
+      text-decoration: none; padding: 0.85rem 1.8rem;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--line); color: var(--muted);
+      text-decoration: none; padding: 0.85rem 1.8rem;
+      font-size: 0.85rem; font-weight: 400; letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Sections */
+    section { padding: 3rem 0; border-top: 1px solid var(--line); }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 400; line-height: 1.2; margin-bottom: 2rem;
+    }
+
+    /* Education */
+    .edu-card {
+      background: var(--card); border: 1px solid var(--line);
+      padding: 1.8rem 2rem;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1rem; transition: box-shadow 0.2s;
+    }
+    .edu-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.15rem; margin-bottom: 0.25rem; }
+    .edu-school { font-size: 0.85rem; color: var(--muted); }
+    .edu-right { text-align: right; flex-shrink: 0; }
+    .edu-gpa { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--accent); display: block; }
+    .edu-year { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--line);
+      padding: 1.6rem; transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .skill-card-title {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+    }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      font-size: 0.88rem; color: var(--muted);
+      padding: 0.35rem 0; border-bottom: 1px solid var(--line);
+    }
+    .skill-list li:last-child { border-bottom: none; }
+
+    /* Experience Timeline */
+    .timeline-item {
+      display: grid; grid-template-columns: 130px 1fr;
+      gap: 2rem; padding: 1.8rem 0; border-bottom: 1px solid var(--line);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--muted); padding-top: 0.2rem; letter-spacing: 0.05em;
+    }
+    .timeline-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.2rem; }
+    .timeline-org { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent); margin-bottom: 0.6rem; }
+    .timeline-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* Project */
+    .project-card { background: var(--card); border: 1px solid var(--line); padding: 2rem; }
+    .project-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .project-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.8rem; }
+    .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .tag {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      background: var(--bg); border: 1px solid var(--line);
+      padding: 0.2rem 0.6rem; color: var(--muted); letter-spacing: 0.04em;
+    }
+
+    /* Extracurricular */
+    .extra-item {
+      display: flex; align-items: flex-start; gap: 1.2rem;
+      padding: 1.4rem 0; border-bottom: 1px solid var(--line);
+    }
+    .extra-item:last-child { border-bottom: none; }
+    .extra-icon {
+      width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .extra-text { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .extra-text strong { color: var(--ink); font-weight: 500; }
+
+    /* Contact */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); margin-top: 2rem;
+    }
+    .contact-item {
+      background: var(--card); padding: 1.5rem;
+      text-decoration: none; color: inherit;
+      display: flex; align-items: center; gap: 1rem; transition: background 0.2s;
+    }
+    .contact-item:hover { background: var(--ink); color: #fff; }
+    .contact-item:hover .contact-label,
+    .contact-item:hover .contact-value { color: rgba(255,255,255,0.75); }
+    .contact-icon { font-size: 1.2rem; min-width: 24px; transition: color 0.2s; }
+    .contact-label {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.15rem; transition: color 0.2s;
+    }
+    .contact-value { font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fu  { animation: fadeUp 0.7s ease both; }
+    .d1  { animation-delay: 0.1s; }
+    .d2  { animation-delay: 0.25s; }
+    .d3  { animation-delay: 0.4s; }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .hero-inner { flex-direction: column-reverse; gap: 2rem; }
+      .hero-photo img { width: 140px; height: 160px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .edu-card { flex-direction: column; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-logo">Home</a>
+      <ul class="nav-links">
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-tag fu">A Robotics and Automation Student</p>
+          <h1 class="fu d1">Desamsetti<br><em>Sivaji.</em></h1>
+          <p class="hero-desc fu d2">
+            Motivated MTech student in Robotics &amp; Automation with hands-on experience in Arduino-based projects, robotic arm automation, and embedded systems. Skilled in Python, PLC, ESP32, and CAD design.
+          </p>
+          <div class="hero-actions fu d3">
+            <a href="#contact" class="btn-primary">Get in touch &#8594;</a>
+            <a href="#experience" class="btn-ghost">View Experience</a>
+          </div>
+        </div>
+        <div class="hero-photo fu d2">
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QC8RXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABgAAAAAQAAAGAAAAABAAAABgAAkAcABAAAADAyMTABkQcABAAAAAECAwAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAMAAQAAAPIAAAADoAMAAQAAAEABAAAAAAAA/+EO0Gh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI2LTAzLTA0PC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkRhdGE+eyZxdW90O2RvYyZxdW90OzomcXVvdDtEQUhEQVE0a19zcyZxdW90OywmcXVvdDt1c2VyJnF1b3Q7OiZxdW90O1VBSERBZElaLVEwJnF1b3Q7LCZxdW90O2JyYW5kJnF1b3Q7OiZxdW90O0JBSERBVFRiTHZzJnF1b3Q7fTwvQXR0cmliOkRhdGE+CiAgICAgPEF0dHJpYjpFeHRJZD4xZjA1MGVlMC0wOTJjLTQ5ZWQtOGFhMi1jOWNmOTBmMmViMWQ8L0F0dHJpYjpFeHRJZD4KICAgICA8QXR0cmliOkZiSWQ+NTI1MjY1OTE0MTc5NTgwPC9BdHRyaWI6RmJJZD4KICAgICA8QXR0cmliOlRvdWNoVHlwZT4yPC9BdHRyaWI6VG91Y2hUeXBlPgogICAgPC9yZGY6bGk+CiAgIDwvcmRmOlNlcT4KICA8L0F0dHJpYjpBZHM+CiA8L3JkZjpEZXNjcmlwdGlvbj4KCiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0nJwogIHhtbG5zOmRjPSdodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyc+CiAgPGRjOnRpdGxlPgogICA8cmRmOkFsdD4KICAgIDxyZGY6bGkgeG1sOmxhbmc9J3gtZGVmYXVsdCc+VW50aXRsZWQgZGVzaWduIC0gMTwvcmRmOmxpPgogICA8L3JkZjpBbHQ+CiAgPC9kYzp0aXRsZT4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6cGRmPSdodHRwOi8vbnMuYWRvYmUuY29tL3BkZi8xLjMvJz4KICA8cGRmOkF1dGhvcj5NYWhpdGhhIFZhcm1hPC9wZGY6QXV0aG9yPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczp4bXA9J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8nPgogIDx4bXA6Q3JlYXRvclRvb2w+Q2FudmEgKFJlbmRlcmVyKSBkb2M9REFIREFRNGtfc3MgdXNlcj1VQUhEQWRJWi1RMCBicmFuZD1CQUhEQVRUYkx2czwveG1wOkNyZWF0b3JUb29sPgogPC9yZGY6RGVzY3JpcHRpb24+CjwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9J3cnPz7/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAFAAPIDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RV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" alt="Desamsetti Sivaji" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Education</p>
+      <h2>Academic background</h2>
+      <div class="edu-card">
+        <div>
+          <p class="edu-degree">M.Tech — Robotics and Automation</p>
+          <p class="edu-school">Amrita Vishwa Vidyapeetham, Bengaluru</p>
+        </div>
+        <div class="edu-right">
+          <span class="edu-gpa">7.4</span>
+          <span class="edu-year">2025 &#8211; 2027</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <p class="edu-degree">B.Tech — Mechanical Engineering</p>
+          <p class="edu-school">Raghu Engineering College, Visakhapatnam</p>
+        </div>
+        <div class="edu-right">
+          <span class="edu-gpa">7.1</span>
+          <span class="edu-year">2020 &#8211; 2024</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <p class="edu-degree">Intermediate — Mathematics, Physics &amp; Chemistry</p>
+          <p class="edu-school">Sri Prakash Junior College</p>
+        </div>
+        <div class="edu-right">
+          <span class="edu-gpa">8.52</span>
+          <span class="edu-year">2018 &#8211; 2020</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <p class="edu-degree">Matriculation (10th Standard)</p>
+          <p class="edu-school">Sri Prakash Vidya Niketan School</p>
+        </div>
+        <div class="edu-right">
+          <span class="edu-gpa">9.5</span>
+          <span class="edu-year">2017 &#8211; 2018</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <h2>What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <p class="skill-card-title">Technical Skills</p>
+          <ul class="skill-list">
+            <li>3D Printing</li>
+            <li>Mechatronics</li>
+            <li>CAD Modeling</li>
+            <li>Fabrication &amp; Assembly</li>
+            <li>EV Technology</li>
+            <li>C Language</li>
+            <li>Python</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <p class="skill-card-title">Soft Skills</p>
+          <ul class="skill-list">
+            <li>Leadership</li>
+            <li>Teamwork</li>
+            <li>Decision Making</li>
+            <li>Problem Solving</li>
+            <li>Communication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Experience</p>
+      <h2>Internship</h2>
+      <div class="timeline-item">
+        <p class="timeline-date">Jun &#8211; Jul 2023</p>
+        <div class="timeline-content">
+          <h3>3D Printing &amp; Mechatronics Intern</h3>
+          <p class="timeline-org">Robocoupler Private Limited</p>
+          <p class="timeline-desc">Completed an intensive internship focused on 3D printing technologies and mechatronics systems. Gained practical exposure to additive manufacturing workflows, mechanical component design, and integration of electronic control systems in robotic prototypes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <h2>Capstone Work</h2>
+
+      <div class="project-card" style="margin-bottom:1rem;">
+        <p class="project-num">01 · B.Tech Final Year · 2024</p>
+        <p class="project-title">Go-Kart Manufacturing</p>
+        <p class="project-desc">Designed and constructed a fully functional, electrically powered go-kart. The project involved intensive research, CAD modeling, hands-on fabrication, and rigorous iterative testing. Engineering principles were applied across chassis design, propulsion systems, and safety features — integrating sustainable electric vehicle technology throughout.</p>
+        <div class="tag-list">
+          <span class="tag">Electric Vehicle</span>
+          <span class="tag">CAD Modeling</span>
+          <span class="tag">Chassis Design</span>
+          <span class="tag">Fabrication</span>
+          <span class="tag">Propulsion Systems</span>
+          <span class="tag">Safety Engineering</span>
+        </div>
+      </div>
+
+      <div class="project-card" style="margin-top:1rem;">
+        <p class="project-num">02 · Project</p>
+        <p class="project-title">Remote Patient Monitoring System</p>
+        <p class="project-desc">Developed a system to continuously monitor patients&#39; vital signs (heart rate, temperature) and transmit real-time data to healthcare providers. Enabled timely intervention and remote health monitoring, significantly enhancing patient care efficiency.</p>
+        <div class="tag-list">
+          <span class="tag">IoT</span>
+          <span class="tag">Sensors</span>
+          <span class="tag">Real-time Data</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">Embedded Systems</span>
+        </div>
+      </div>
+
+      <div class="project-card" style="margin-top:1rem;">
+        <p class="project-num">03 · Project</p>
+        <p class="project-title">Automated Robotic Arm</p>
+        <p class="project-desc">Designed and implemented a 4-DOF robotic arm using Arduino and IR sensors for autonomous pick-and-place operations. Provided a low-cost solution for educational purposes and small-scale industrial automation.</p>
+        <div class="tag-list">
+          <span class="tag">Arduino</span>
+          <span class="tag">IR Sensors</span>
+          <span class="tag">4-DOF</span>
+          <span class="tag">Robotics</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Extracurricular -->
+  <section id="extra">
+    <div class="container">
+      <p class="section-label">Extracurricular</p>
+      <h2>Beyond the classroom</h2>
+      <div class="extra-item">
+        <div class="extra-icon">&#127952;</div>
+        <p class="extra-text">
+          <strong>District-level Volleyball Championship</strong> — Represented the institution at the district level during Intermediate, demonstrating teamwork, discipline, and competitive sportsmanship.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h2>Let&#39;s connect</h2>
+      <p style="color:var(--muted);font-size:0.92rem;max-width:460px;">
+        Open to new opportunities and collaborations. Feel free to reach out via email or phone, or connect with me on LinkedIn. I'm always eager to discuss potential projects, internships, or just chat about the latest in robotics and automation!
+      </p>
+      <div class="contact-grid">
+        <a href="mailto:desamsettishivaji03@gmail.com" class="contact-item">
+          <span class="contact-icon">&#9993;</span>
+          <div>
+            <p class="contact-label">Email</p>
+            <p class="contact-value">desamsettishivaji03@gmail.com</p>
+          </div>
+        </a>
+        <a href="tel:+916304642479" class="contact-item">
+          <span class="contact-icon">&#9990;</span>
+          <div>
+            <p class="contact-label">Phone</p>
+            <p class="contact-value">+91 6304642479</p>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/sivaji-desamsetti-990691390?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-item">
+          <span class="contact-icon">in</span>
+          <div>
+            <p class="contact-label">LinkedIn</p>
+            <p class="contact-value">LinkedIn URL</p>
+          </div>
+        </a>
+        <a href="https://github.com/Sivajidesamsetti" class="contact-item">
+          <span class="contact-icon">&#128205;</span>
+          <div>
+            <p class="contact-label">GitHub</p>
+            <p class="contact-value">GitHub URL</p>
+          </div>
+        </a>
+        <a href="#" class="contact-item">
+          <span class="contact-icon">&#128205;</span>
+          <div>
+            <p class="contact-label">Location</p>
+            <p class="contact-value">Bengaluru, Karnataka &#8212; 560035</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
